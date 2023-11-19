@@ -15,4 +15,13 @@ class BallNumberTest {
         BallNumber ballNumber = new BallNumber(number);
         assertThat(ballNumber).isEqualTo(new BallNumber(number));
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 10})
+    @DisplayName("공의 숫자 범위가 1보다 작거나 9보다 크다면 예외가 발생한다.")
+    void invalidBallNumber(int number) {
+        assertThatThrownBy(() -> new BallNumber(number))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("공의 숫자 범위는 1에서 9사이의 값이어야 합니다.");
+    }
 }
