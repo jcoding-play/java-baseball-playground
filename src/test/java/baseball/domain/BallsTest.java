@@ -1,9 +1,11 @@
 package baseball.domain;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
@@ -11,14 +13,19 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class BallsTest {
+    private Balls balls;
+
+    @BeforeEach
+    void setUp() {
+        balls = new Balls(Arrays.asList(1, 2, 3));
+    }
 
     @Test
     @DisplayName("공들에 대한 정보를 가진다.")
     void createBalls() {
-        Balls balls = new Balls(Arrays.asList(1, 2, 3));
-
         assertThat(balls).extracting("balls", InstanceOfAssertFactories.list(Ball.class))
                 .containsExactly(new Ball(1, 1), new Ball(2, 2), new Ball(3, 3));
     }
@@ -45,5 +52,22 @@ class BallsTest {
         assertThatThrownBy(() -> new Balls(Arrays.asList(1, 2, 2)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("공들 중 중복되는 숫자가 존재합니다.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("ballAndBallStatus")
+    @DisplayName("공 하나와 비교하여 결과를 알 수 있다.")
+    void compare(Ball ball, BallStatus expected) {
+        BallStatus actual = balls.compare(ball);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> ballAndBallStatus() {
+        return Stream.of(
+                arguments(new Ball(1, 1), BallStatus.STRIKE),
+                arguments(new Ball(1, 3), BallStatus.BALL),
+                arguments(new Ball(4, 1), BallStatus.NOTHING)
+        );
     }
 }

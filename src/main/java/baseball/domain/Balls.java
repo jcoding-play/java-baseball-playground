@@ -45,4 +45,12 @@ public class Balls {
     private Ball generateBall(List<Integer> ballNumbers, int index) {
         return new Ball(ballNumbers.get(index), index + 1);
     }
+
+    public BallStatus compare(Ball ball) {
+        return balls.stream()
+                .map(ball::compare)
+                .filter(BallStatus::isNotNothing)
+                .findFirst()
+                .orElse(BallStatus.NOTHING);
+    }
 }
