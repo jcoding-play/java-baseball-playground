@@ -2,8 +2,10 @@ package baseball.domain;
 
 import baseball.utils.Constants;
 
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 public class Balls {
     private final List<Ball> balls;
@@ -29,6 +31,17 @@ public class Balls {
 
     private boolean hasDuplicatedBallNumber(List<Integer> ballNumbers) {
         return ballNumbers.size() != new HashSet<>(ballNumbers).size();
+    }
+
+    public Map<BallStatus, Integer> compare(Balls userBalls) {
+        Map<BallStatus, Integer> result = new EnumMap<>(BallStatus.class);
+
+        for (Ball ball : this.balls) {
+            BallStatus ballStatus = userBalls.compare(ball);
+            result.put(ballStatus, result.getOrDefault(ballStatus, Constants.INITIAL_COUNT) + 1);
+        }
+
+        return result;
     }
 
     public BallStatus compare(Ball ball) {

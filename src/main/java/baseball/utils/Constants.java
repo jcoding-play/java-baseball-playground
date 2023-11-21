@@ -5,4 +5,6 @@ public abstract class Constants {
     public static final int MAXIMUM_BALL_NUMBER = 9;
 
     public static final int VALID_BALLS_SIZE = 3;
+
+    public static final int INITIAL_COUNT = 0;
 }
