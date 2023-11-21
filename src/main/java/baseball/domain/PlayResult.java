@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class PlayResult {
+    private static final int MAXIMUM_STRIKE_COUNT = 3;
+
     private final int strike;
     private final int ball;
 
@@ -21,6 +23,10 @@ public class PlayResult {
 
     private int findCountOf(BallStatus ballStatus, Map<BallStatus, Integer> playResult) {
         return playResult.getOrDefault(ballStatus, Constants.INITIAL_COUNT);
+    }
+
+    public boolean isThreeStrike() {
+        return strike == MAXIMUM_STRIKE_COUNT;
     }
 
     @Override
