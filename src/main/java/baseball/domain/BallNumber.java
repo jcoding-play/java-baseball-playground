@@ -2,10 +2,9 @@ package baseball.domain;
 
 import java.util.Objects;
 
-public class BallNumber {
-    private static final int MIN_BALL_NUMBER = 1;
-    private static final int MAX_BALL_NUMBER = 9;
+import static baseball.utils.Constants.*;
 
+public class BallNumber {
     private final int ballNumber;
 
     public BallNumber(int ballNumber) {
@@ -14,9 +13,9 @@ public class BallNumber {
     }
 
     private void validateBallNumber(int ballNumber) {
-        if (ballNumber < MIN_BALL_NUMBER || ballNumber > MAX_BALL_NUMBER) {
+        if (ballNumber < MINIMUM_BALL_NUMBER || ballNumber > MAXIMUM_BALL_NUMBER) {
             throw new IllegalArgumentException(
-                    String.format("공의 숫자 범위는 %d에서 %d사이의 값이어야 합니다.", MIN_BALL_NUMBER, MAX_BALL_NUMBER)
+                    String.format("공의 숫자 범위는 %d에서 %d사이의 값이어야 합니다.", MINIMUM_BALL_NUMBER, MAXIMUM_BALL_NUMBER)
             );
         }
     }

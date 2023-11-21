@@ -1,5 +1,7 @@
 package baseball.domain;
 
+import baseball.utils.Constants;
+
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -15,11 +17,11 @@ public class RandomNumberGenerator {
     public List<Integer> createRandomNumbers() {
         return Stream.generate(this::createRandomNumber)
                 .distinct()
-                .limit(3)
+                .limit(Constants.VALID_BALLS_SIZE)
                 .collect(Collectors.toList());
     }
 
     private int createRandomNumber() {
-        return random.nextInt(9) + 1;
+        return random.nextInt(Constants.MAXIMUM_BALL_NUMBER) + Constants.MINIMUM_BALL_NUMBER;
     }
 }
