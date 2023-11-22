@@ -2,8 +2,10 @@ package baseball.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
@@ -58,5 +60,13 @@ class BaseballGameTest {
                 arguments(new Balls(Arrays.asList(1, 3, 4)), true),
                 arguments(new Balls(Arrays.asList(4, 5, 6)), true)
         );
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"RESTART, true", "QUIT, false"})
+    @DisplayName("게임이 종료한 후 다시 시작할 수 있는지 없는지를 알 수 있다.")
+    void canRestart(GameCommand gameCommand, boolean expected) {
+        boolean actual = baseballGame.canRestart(gameCommand);
+        assertThat(actual).isEqualTo(expected);
     }
 }

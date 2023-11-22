@@ -25,4 +25,8 @@ public class BaseballGame {
     public boolean isPlayable() {
         return gameState.isPlaying();
     }
+
+    public boolean canRestart(GameCommand gameCommand) {
+        return gameCommand.isRestart();
+    }
 }
