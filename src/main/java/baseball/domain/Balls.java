@@ -37,14 +37,14 @@ public class Balls {
         Map<BallStatus, Integer> result = new EnumMap<>(BallStatus.class);
 
         for (Ball ball : this.balls) {
-            BallStatus ballStatus = userBalls.compare(ball);
+            BallStatus ballStatus = userBalls.judgeBallStatusOf(ball);
             result.put(ballStatus, result.getOrDefault(ballStatus, Constants.INITIAL_COUNT) + 1);
         }
 
         return result;
     }
 
-    public BallStatus compare(Ball ball) {
+    protected BallStatus judgeBallStatusOf(Ball ball) {
         return balls.stream()
                 .map(ball::compare)
                 .filter(BallStatus::isNotNothing)

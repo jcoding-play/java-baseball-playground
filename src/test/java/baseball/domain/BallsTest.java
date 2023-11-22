@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -57,8 +58,8 @@ class BallsTest {
     @ParameterizedTest
     @MethodSource("ballAndBallStatus")
     @DisplayName("공 하나와 비교하여 결과를 알 수 있다.")
-    void compare(Ball ball, BallStatus expected) {
-        BallStatus actual = balls.compare(ball);
+    void judgeBallStatusOf(Ball ball, BallStatus expected) {
+        BallStatus actual = balls.judgeBallStatusOf(ball);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -68,6 +69,17 @@ class BallsTest {
                 arguments(new Ball(1, 1), BallStatus.STRIKE),
                 arguments(new Ball(1, 3), BallStatus.BALL),
                 arguments(new Ball(4, 1), BallStatus.NOTHING)
+        );
+    }
+
+    @Test
+    @DisplayName("사용자와 컴퓨터의 공을 비교하여 결과를 알 수 있다.")
+    void compare() {
+        Balls userBalls = new Balls(Arrays.asList(1, 4, 2));
+        Map<BallStatus, Integer> result = balls.compare(userBalls);
+
+        assertThat(result).contains(
+                entry(BallStatus.STRIKE, 1), entry(BallStatus.BALL, 1), entry(BallStatus.NOTHING, 1)
         );
     }
 }
