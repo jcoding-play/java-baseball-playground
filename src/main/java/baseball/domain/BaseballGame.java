@@ -31,18 +31,10 @@ public class BaseballGame {
     }
 
     public boolean canRestart(GameCommand gameCommand) {
-        return gameCommand.isRestart();
+        return gameCommand.isRestart() && gameState.isEnd();
     }
 
     public void restart(NumberGenerator<List<Integer>> numberGenerator) {
-        validateGameState();
-
         initializeBaseballGame(numberGenerator);
-    }
-
-    private void validateGameState() {
-        if (gameState.isPlaying()) {
-            throw new IllegalArgumentException("게임이 종료되지 않은 상태에서 게임을 재시작할 수 없습니다.");
-        }
     }
 }
