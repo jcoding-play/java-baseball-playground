@@ -33,4 +33,13 @@ class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("공의 숫자에 대한 입력은 숫자만 가능합니다.");
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "!", "12A", "11", "22"})
+    @DisplayName("재시작 여부에 대한 입력이 1 또는 2가 아니면 예외가 발생한다.")
+    void validateGameCommand(String input) {
+        assertThatThrownBy(() -> inputValidator.validateGameCommand(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("게임 재시작 여부에 대한 입력은 1 또는 2로만 가능합니다. 현재 입력 값=" + input);
+    }
 }
