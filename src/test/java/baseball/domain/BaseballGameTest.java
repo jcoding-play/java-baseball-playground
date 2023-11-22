@@ -69,4 +69,22 @@ class BaseballGameTest {
         boolean actual = baseballGame.canRestart(gameCommand);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("게임을 종료한 후 다시 시작할 수 있다.")
+    void restart() {
+        baseballGame.play(new Balls(Arrays.asList(1, 2, 3)));
+        assertThat(baseballGame.isPlayable()).isFalse();
+
+        baseballGame.restart(new RandomNumberGenerator());
+        assertThat(baseballGame.isPlayable()).isTrue();
+    }
+
+    @Test
+    @DisplayName("게임이 종료되지 않은 상태에서 게임을 재시작하려 하면 예외가 발생한다.")
+    void invalidToRestart() {
+        assertThatThrownBy(() -> baseballGame.restart(new RandomNumberGenerator()))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("게임이 종료되지 않은 상태에서 게임을 재시작할 수 없습니다.");
+    }
 }
