@@ -16,7 +16,7 @@ public class InputView {
     }
 
     public String readBallNumbers() {
-        System.out.println(READ_BALL_NUMBERS_MESSAGE);
+        System.out.print(READ_BALL_NUMBERS_MESSAGE);
         String input = scanner.nextLine();
 
         inputValidator.validateBallNumbers(input);
