@@ -1,11 +1,11 @@
 package baseball.controller;
 
 import baseball.domain.*;
+import baseball.utils.Converter;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MainController {
     private final InputView inputView;
@@ -42,15 +42,9 @@ public class MainController {
 
     private Balls readUserBalls() {
         String readBallNumbers = inputView.readBallNumbers();
-        List<Integer> ballNumbers = convertToIntegerList(readBallNumbers);
+        List<Integer> ballNumbers = Converter.convertToIntegerList(readBallNumbers);
 
         return new Balls(ballNumbers);
-    }
-
-    private List<Integer> convertToIntegerList(String readBallNumbers) {
-        return readBallNumbers.chars()
-                .mapToObj(Character::getNumericValue)
-                .collect(Collectors.toList());
     }
 
     private void determineToRestartOrNot(BaseballGame baseballGame) {
