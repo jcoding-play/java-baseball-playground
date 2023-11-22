@@ -29,6 +29,14 @@ public class PlayResult {
         return strike == MAXIMUM_STRIKE_COUNT;
     }
 
+    public int getStrike() {
+        return strike;
+    }
+
+    public int getBall() {
+        return ball;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
