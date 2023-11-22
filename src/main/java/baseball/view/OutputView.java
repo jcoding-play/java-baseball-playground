@@ -6,6 +6,7 @@ public class OutputView {
     private static final String NOTHING_MESSAGE = "낫싱";
     private static final String BALL_MESSAGE = "볼";
     private static final String STRIKE_MESSAGE = "스트라이크";
+    private static final String EMPTY_MESSAGE = "";
     private static final String RESULT_MESSAGE_FORMAT = "%s %s";
     private static final String END_MESSAGE_FORMAT = "%d개의 숫자를 모두 맞히셨습니다! 게임 종료\n";
     private static final int NOTHING_COUNT = 0;
@@ -33,6 +34,9 @@ public class OutputView {
     }
 
     private String generateMessageOf(int count, String suffix) {
+        if (count == NOTHING_COUNT) {
+            return EMPTY_MESSAGE;
+        }
         return count + suffix;
     }
 
