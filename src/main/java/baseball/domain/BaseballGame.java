@@ -7,8 +7,8 @@ public class BaseballGame {
     private final Balls computerBalls;
     private GameState gameState;
 
-    public BaseballGame(List<Integer> ballNumbers) {
-        this.computerBalls = new Balls(ballNumbers);
+    public BaseballGame(NumberGenerator<List<Integer>> numberGenerator) {
+        this.computerBalls = new Balls(numberGenerator.generate());
         this.gameState = GameState.PLAYING;
     }
 

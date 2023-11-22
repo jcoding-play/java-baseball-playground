@@ -17,7 +17,7 @@ class BaseballGameTest {
 
     @BeforeEach
     void setUp() {
-        baseballGame = new BaseballGame(Arrays.asList(1, 2, 3));
+        baseballGame = new BaseballGame(() -> Arrays.asList(1, 2, 3));
     }
 
     @ParameterizedTest

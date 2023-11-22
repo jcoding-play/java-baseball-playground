@@ -14,7 +14,7 @@ class RandomNumberGeneratorTest {
     @DisplayName("1에서 9까지 서로 다른 임의의 수 3개를 선택한다.")
     void createRandomNumbers() {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-        List<Integer> randomNumbers = randomNumberGenerator.createRandomNumbers();
+        List<Integer> randomNumbers = randomNumberGenerator.generate();
 
         for (Integer randomNumber : randomNumbers) {
             assertThat(randomNumber).isBetween(1, 9);

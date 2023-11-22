@@ -7,14 +7,15 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class RandomNumberGenerator {
+public class RandomNumberGenerator implements NumberGenerator<List<Integer>> {
     private final Random random;
 
     public RandomNumberGenerator() {
         this.random = new Random();
     }
 
-    public List<Integer> createRandomNumbers() {
+    @Override
+    public List<Integer> generate() {
         return Stream.generate(this::createRandomNumber)
                 .distinct()
                 .limit(Constants.VALID_BALLS_SIZE)
