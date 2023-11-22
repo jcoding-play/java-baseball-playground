@@ -3,8 +3,8 @@ package baseball.domain;
 import java.util.Objects;
 
 public class Position {
-    private static final int MIN_POSITION = 1;
-    private static final int MAX_POSITION = 3;
+    private static final int MINIMUM_POSITION = 1;
+    private static final int MAXIMUM_POSITION = 3;
 
     private final int position;
 
@@ -14,8 +14,9 @@ public class Position {
     }
 
     private void validatePosition(int position) {
-        if (position < MIN_POSITION || position > MAX_POSITION) {
-            throw new IllegalArgumentException("공의 위치는 1에서 3사이어야 합니다.");
+        if (position < MINIMUM_POSITION || position > MAXIMUM_POSITION) {
+            throw new IllegalArgumentException(
+                    String.format("공의 위치는 %d에서 %d사이어야 합니다.", MINIMUM_POSITION, MAXIMUM_POSITION));
         }
     }
 
